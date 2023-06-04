@@ -1,5 +1,3 @@
-import '../Button.scss'
-
 type ButtonProps = {
   /** Button Types */
   isIcon?: boolean
