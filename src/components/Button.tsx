@@ -1,5 +1,3 @@
-import '../Button.scss'
-
 type ButtonProps = {
   /** Button Types */
   isIcon?: boolean
@@ -7,17 +5,16 @@ type ButtonProps = {
   isToggle?: boolean
   isOutline?: boolean
   isGhost?: boolean
+  isDarkMode?: boolean
 
   /** Button State */
   disabled?: boolean
   active?: boolean
   hover?: boolean
-  loading?: boolean
-  darkMode?: boolean
 
   /** Button Elements */
   icon?: string
-  label?: string
+  label: string
 
   /** Button Attributes */
   primaryColor?: string
@@ -30,6 +27,6 @@ type ButtonProps = {
   onClick?: () => void
 }
 
-export function Button(props: ButtonProps) {
-  return <button {...props}>{props.label}</button>
+export default function Button(props: ButtonProps) {
+  return <button>{props.label}</button>
 }
