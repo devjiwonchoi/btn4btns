@@ -1,22 +1,26 @@
-type ButtonProps = {
+import { HTMLAttributes } from 'react'
+
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /** Button Types */
   isIcon?: boolean
+  isLink?: boolean
   isText?: boolean
   isToggle?: boolean
   isOutline?: boolean
   isGhost?: boolean
-  isDarkMode?: boolean
 
   /** Button State */
   disabled?: boolean
   active?: boolean
   hover?: boolean
+  darkmode?: boolean
 
   /** Button Elements */
   icon?: string
-  label: string
+  label?: string
 
   /** Button Attributes */
+  variant?: 'primary' | 'secondary'
   primaryColor?: string
   secondaryColor?: string
   disabledColor?: string
@@ -27,6 +31,8 @@ type ButtonProps = {
   onClick?: () => void
 }
 
-export default function Button(props: ButtonProps) {
-  return <button>{props.label}</button>
+const Button = (props: ButtonProps) => {
+  return <button {...props}>{props.label}</button>
 }
+
+export default Button
