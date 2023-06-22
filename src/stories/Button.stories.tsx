@@ -10,26 +10,23 @@ const meta: Meta = {
 export default meta
 type Story = StoryObj<typeof Button>
 
-export const Primary: Story = {
+export const Label: Story = {
   args: {
-    variant: 'primary',
-    primaryColor: 'lightblue',
-    label: 'Button',
+    variant: 'label',
+    children: 'LABEL BUTTON',
   },
 }
 
-export const Secondary: Story = {
+export const Outline: Story = {
   args: {
-    variant: 'secondary',
-    secondaryColor: 'white',
-    label: 'Button',
+    variant: 'outline',
+    children: 'OUTLINE BUTTON',
   },
 }
 
-export const Disabled: Story = {
+export const Text: Story = {
   args: {
-    disabled: true,
-    disabledColor: 'gray',
-    label: 'Button',
+    variant: 'text',
+    children: 'TEXT BUTTON',
   },
 }
