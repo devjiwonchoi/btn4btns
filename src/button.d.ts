@@ -11,7 +11,6 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Button State */
   disabled?: boolean
   loading?: boolean
-  error?: boolean
   /** Button Elements */
   href?: string // Converts to Link Button
 

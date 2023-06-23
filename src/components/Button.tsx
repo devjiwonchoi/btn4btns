@@ -3,7 +3,8 @@ import styled from '@emotion/styled'
 import { darken, lighten } from 'polished'
 import { ButtonProps } from '../button'
 
-const baseButtonStyles = ({ disabled, error, size = 'md' }: ButtonProps) => css`
+const baseButtonStyles = ({ disabled, size = 'md' }: ButtonProps) => css`
+  border-style: solid;
   border-radius: 4px;
   cursor: pointer;
   transition-duration: 0.25s;
@@ -38,49 +39,73 @@ const baseButtonStyles = ({ disabled, error, size = 'md' }: ButtonProps) => css`
 
 const LabelButton = styled.button`
   ${baseButtonStyles};
-  border-style: solid;
-  ${({ color }) => color && `border-color: ${color};`}
-  ${({ color }) => color && `&:hover { border-color: ${lighten(0.1, color)}; }`}
-  ${({ color }) => color && `&:active { border-color: ${darken(0.1, color)}; }`}
-  ${({ color }) => color && `background-color: ${color};`}
-  ${({ color }) =>
-    color && `&:hover { background-color: ${lighten(0.1, color)}; }`}
-  ${({ color }) =>
-    color && `&:active { background-color: ${darken(0.1, color)}; }`}
+  ${({ color }) => {
+    return (
+      color &&
+      `
+        background-color: ${color};
+        border-color: ${color};
+        &:hover {
+          background-color: ${lighten(0.1, color)};
+          border-color: ${lighten(0.1, color)};
+        }
+        &:active {
+          background-color: ${darken(0.1, color)};
+          border-color: ${darken(0.1, color)};
+        }
+      `
+    )
+  }}
 `
 
 const OutlineButton = styled.button`
   ${baseButtonStyles};
-  color: ${({ color }) => color};
   background-color: transparent;
-  border-style: solid;
-  ${({ color }) =>
-    color && `&:hover { background-color: ${lighten(0.2, color)}; }`}
-  ${({ color }) =>
-    color && `&:active { background-color: ${lighten(0.15, color)}; }`}
-  ${({ color }) => color && `border-color: ${darken(0.1, color)};`}
-  ${({ color }) => color && `&:hover { border-color: ${color}; }`}
+  ${({ color }) => {
+    return (
+      color &&
+      `
+        color: ${color};
+        border-color: ${darken(0.1, color)};
+        &:hover {
+          background-color: ${lighten(0.2, color)};
+          border-color: ${color};
+        }
+        &:active {
+          background-color: ${lighten(0.15, color)};
+        }
+      `
+    )
+  }}
 `
 
 const TextButton = styled.button`
   ${baseButtonStyles};
   background-color: transparent;
-  border-style: solid;
   border-color: transparent;
-  color: ${({ color }) => color};
-  ${({ color }) =>
-    color && `&:hover { background-color: ${lighten(0.15, color)}; }`}
-  ${({ color }) =>
-    color && `&:active { background-color: ${lighten(0.1, color)}; }`}
-  ${({ color }) => color && `&:hover {border-color: ${lighten(0.15, color)}; }`}
-  ${({ color }) =>
-    color && `&:active { border-color: ${lighten(0.1, color)}; }`}
+  border-style: solid;
+  ${({ color }) => {
+    return (
+      color &&
+      `
+        color: ${color};
+        &:hover {
+          background-color: ${lighten(0.15, color)};
+          border-color: ${lighten(0.15, color)};
+        }
+        &:active {
+          background-color: ${lighten(0.1, color)};
+          border-color: ${lighten(0.1, color)};
+        }
+      `
+    )
+  }}
 `
 
 export default function Button({
   children,
+  color,
   disabled,
-  error,
   variant,
   size,
   ...props
@@ -88,30 +113,19 @@ export default function Button({
   return (
     <>
       {variant === 'label' ? (
-        <LabelButton
-          color='#ADD8E6'
-          size={size}
-          disabled={disabled}
-          error={error}
-          {...props}
-        >
+        <LabelButton color={color} size={size} disabled={disabled} {...props}>
           {children}
         </LabelButton>
       ) : variant === 'outline' ? (
-        <OutlineButton
-          color='#ADD8E6'
-          size={size}
-          disabled={disabled}
-          {...props}
-        >
+        <OutlineButton color={color} size={size} disabled={disabled} {...props}>
           {children}
         </OutlineButton>
       ) : variant === 'text' ? (
-        <TextButton color='#ADD8E6' size={size} disabled={disabled} {...props}>
+        <TextButton color={color} size={size} disabled={disabled} {...props}>
           {children}
         </TextButton>
       ) : (
-        <LabelButton color='#ADD8E6' size={size} disabled={disabled} {...props}>
+        <LabelButton color={color} size={size} disabled={disabled} {...props}>
           {children}
         </LabelButton>
       )}
