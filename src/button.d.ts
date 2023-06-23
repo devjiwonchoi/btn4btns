@@ -13,6 +13,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   loading?: boolean
   /** Button Elements */
   href?: string // Converts to Link Button
+  checked?: boolean // Converts to Input Button
 
   /** Button Attributes */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'

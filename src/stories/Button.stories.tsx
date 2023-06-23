@@ -33,3 +33,11 @@ export const Text: Story = {
     children: 'TEXT BUTTON',
   },
 }
+
+export const Toggle: Story = {
+  args: {
+    variant: 'toggle',
+    color: '#ADD8E6',
+    children: 'TOGGLE BUTTON',
+  },
+}
