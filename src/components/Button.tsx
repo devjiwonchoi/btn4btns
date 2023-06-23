@@ -52,11 +52,7 @@ const baseButtonStyles = ({ disabled, size = 'md' }: ButtonProps) => css`
   `}
 `
 
-const baseInputStyles = ({ disabled, checked }: ButtonProps) => css`
-  ${disabled && 'opacity: 0.5; cursor: not-allowed;'}
-`
-
-const LabelButton = styled.button`
+const LabelButton = styled.button<ButtonProps>`
   ${baseButtonStyles};
   ${({ color }) => {
     return (
@@ -74,7 +70,7 @@ const LabelButton = styled.button`
   }}
 `
 
-const OutlineButton = styled.button`
+const OutlineButton = styled.button<ButtonProps>`
   ${baseButtonStyles};
   border: 1px solid;
   background-color: transparent;
@@ -96,7 +92,7 @@ const OutlineButton = styled.button`
   }}
 `
 
-const TextButton = styled.button`
+const TextButton = styled.button<ButtonProps>`
   ${baseButtonStyles};
   background-color: transparent;
   ${({ color }) => {
@@ -114,8 +110,61 @@ const TextButton = styled.button`
     )
   }}
 `
+const IconButton = styled.button<ButtonProps>`
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  transition-duration: 0.1s;
+  border-radius: 50%;
 
-const ToggleButton = styled.input`
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  /* Size modifiers */
+  ${({ size }) =>
+    size === 'xs' &&
+    css`
+      width: 30px;
+      height: 30px;
+    `}
+
+  ${({ size }) =>
+    size === 'sm' &&
+    css`
+      width: 35px;
+      height: 35px;
+    `}
+
+  ${({ size }) =>
+    size === 'md' &&
+    css`
+      width: 40px;
+      height: 40px;
+    `}
+
+  ${({ size }) =>
+    size === 'lg' &&
+    css`
+      width: 45px;
+      height: 45px;
+    `}
+
+  ${({ size }) =>
+    size === 'xl' &&
+    css`
+      width: 50px;
+      height: 50px;
+    `}
+`
+
+const ToggleButton = styled.input<ButtonProps>`
   appearance: none;
   width: 40px;
   height: 24px;
@@ -142,10 +191,6 @@ const ToggleButton = styled.input`
   }
 `
 
-const CheckboxButton = styled.input`
-  ${baseInputStyles};
-`
-
 export default function Button({
   checked,
   children,
@@ -170,7 +215,16 @@ export default function Button({
           {children}
         </TextButton>
       ) : variant === 'toggle' ? (
-        <ToggleButton type='checkbox' checked={checked} color={color} />
+        <ToggleButton
+          type='checkbox'
+          checked={checked}
+          color={color}
+          disabled={disabled}
+        />
+      ) : variant === 'icon' ? (
+        <IconButton color={color} size={size}>
+          {children}
+        </IconButton>
       ) : (
         <LabelButton color={color} size={size} disabled={disabled} {...props}>
           {children}

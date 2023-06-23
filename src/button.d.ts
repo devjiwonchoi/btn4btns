@@ -4,8 +4,8 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     | 'label'
     | 'outline'
     | 'text'
-    | 'toggle'
     | 'icon'
+    | 'toggle'
     | 'radio'
     | 'checkbox'
   /** Button State */
